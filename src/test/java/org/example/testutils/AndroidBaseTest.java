@@ -32,7 +32,9 @@ public class AndroidBaseTest extends AppiumUtils {
         Properties properties = new Properties();
         FileInputStream fileInputStream = new FileInputStream(System.getProperty("user.dir") + "//src//main//resources//data.properties");
         properties.load(fileInputStream);
-        String ipAddress = (String) properties.get("ipAddress");
+
+        //check if maven is passing properties something like -DipAddress, if yes assign it
+        String ipAddress = System.getProperty("ipAddress") != null ? System.getProperty("ipAddress") : (String) properties.get("ipAddress");
         int port = Integer.parseInt((String) properties.get("port"));
         service = startAppiumServer(ipAddress, port);
 

@@ -72,6 +72,8 @@
 
 
     <!--    our profiles-->
+    <!-- mvn test -PRegression -->
+    <!-- mvn test -PRegression -DipAddress=127.0.0.1  -->
     <profiles>
         <profile>
             <id>Regression</id> <!-- mvn test -PRegression -->

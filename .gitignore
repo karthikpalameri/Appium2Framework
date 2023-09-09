@@ -41,3 +41,4 @@ build/
 
 /reports/
 /reports/*.png
+src/main/resources/appiumLogs/appium.log

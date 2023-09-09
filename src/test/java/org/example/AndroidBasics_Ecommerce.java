@@ -21,7 +21,7 @@ public class AndroidBasics_Ecommerce extends AndroidBaseTest {
     }
 
 
-    @Test(dataProvider = "myDataProviderName", groups = {"smoke1"})
+    @Test(dataProvider = "myDataProviderName", groups = {"smoke"})
     public void addItemToCartTest(HashMap<String, String> data) {
         formPage.setNameField(data.get("name"));
         formPage.setGender(data.get("gender"));
