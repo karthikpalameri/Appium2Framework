@@ -1,0 +1,302 @@
+Installation ::
+
+Installation links for more info :: [ https://rahulshettyacademy.com/blog/index.php/2021/07/25/get-started-with-appium/#t-1603642568346 ]
+
+or
+
+For Installation Follow below steps
+
+Steps::
+
+1. install java and set up env::
+
+2. install android studio::
+sdk path::
+/Users/karthikp/Library/Android/sdk
+
+3. download node::
+https://nodejs.org/en/download
+This package will install:
+	•	Node.js v18.17.1 to /usr/local/bin/node
+	•	npm v9.6.7 to /usr/local/bin/npm
+
+4. set paths::
+a.[windows] Adding Environment variable steps::
+Add "New Sysyem Variable"
+Variable name : ANDROID_HOME
+Variable value: [paste the sdk path where the android sdk was installed in previos step]
+
+
+b.[windows] Append to "Path" vaiable under "System Variables" 
+
+create new project in android studio 
+click on Tools Menu->SDK Manager
+select SDK Tooks Tab
+Uncheck Hide Obsolete Packages
+Check Android SDK Tools (Obsolete) 
+Accept and Click Finish
+Now you will see a folder named "tools" inside "\sdk\" folder 
+Copy the "...\sdk\tools\bin" and append in "Path" variable in System variable
+Copy the "...\sdk\tools" and append in "Path" variable in System variable
+Copy the "...\sdk\platform-tools" and append in "Path" variable in System variable
+
+c.[windows] Add "New Sysyem Variable"
+Variable name : NODE_HOME
+Variable value: [paste the  path where the is installed in previos step]
+
+7a.[windows] Append to "Path" vaiable under "System Variables" 
+Copy the "...\npm\bin" and append in "Path" variable in System variable
+
+
+4
+a.[mac] Adding Environment variable steps::
+
+Install Maven from https://maven.apache.org/download.cgi 
+https://www.youtube.com/watch?v=j0OnSAP-KtU
+click on Binary tar.gz archive link (example : apache-maven-3.9.4-bin.tar.gz)
+and move the extracted to /Applications/ folder 
+
+create new project in android studio 
+click on Tools Menu->SDK Manager
+select SDK Tooks Tab
+Uncheck Hide Obsolete Packages
+Check Android SDK Tools (Obsolete) 
+Accept and Click Finish
+Now you will see a folder named "tools" inside "\sdk\" folder 
+
+launch terminal
+$ open -e ~/.zshenv 
+
+[paste the below in .zshenv] 
+
+
+export JAVA_HOME=$(/usr/libexec/java_home)
+export M2_HOME=/Applications/apache-maven-3.9.4
+export PATH=$PATH:$M2_HOME/bin
+export ANDROID_HOME=/Users/karthikp/Library/Android/sdk
+export PATH=$PATH:/usr/local/git/bin:/usr/local/bin:
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/emulator
+
+[verify using] 
+$ echo $PATH
+
+
+5.install Appium Server via node::
+[mac]
+$ sudo npm install -g appium
+
+[test using giving $ appium]
+			
+---------------------------------
+Driver Installation::
+
+1.install appium driver
+$ sudo npm cache clear --force
+$ appium driver list
+$ appium driver install uiautomator2
+
+---------------------------------
+Install Appium Insoector::
+https://github.com/appium/appium-inspector/releases
+
+---------------------------------
+
+
+Start appium programmatically::
+
+AppiumDriverLocalService service = new AppiumServiceBuilder()
+                .withAppiumJS(new File("//usr//local//lib//node_modules//appium//build//lib//main.js"))
+                .withIPAddress("127.0.0.1")
+                .usingPort(4723)
+                .build();
+
+service.start()
+
+service.stop()
+
+---------------------------------
+
+How to get appPackage and appActivity from Android for appium inspector::
+https://www.automationtestinghub.com/apppackage-and-appactivity-name/
+
+$adb devices
+$adb shell
+
+$dumpsys window displays | grep -E 'mCurrentFocus' 
+
+mCurrentFocus=Window{70f3992 u0 io.appium.android.apis/io.appium.android.apis.ApiDemos}
+
+here::
+appPackage = io.appium.android.apis
+appActivity = io.appium.android.apis.ApiDemos
+
+---------------------------------
+Appium Inspector Json[Android]::
+[will install the apk]
+{
+  "appium:app": "/Users/karthikp/Documents/GitHub/Appium2.0.1_Selenium_Project/src/test/java/resources/ApiDemos-debug.apk",
+  "appium:deviceName": "Pixel 2 XL API 34_emulator",
+  "platformName": "android",
+  "appium:automationName": "UIAutomator2"
+}
+
+[will launch the app based on appPackage and appActivity]
+{
+  "appium:deviceName": "Pixel 2 XL API 34_emulator",
+  "platformName": "android",
+  "appium:automationName": "UIAutomator2",
+  "appPackage": "io.appium.android.apis",
+  "appActivity": "io.appium.android.apis.ApiDemos"
+}
+
+---------------------------------
+Install app using adb::
+adb install /Users/karthikp/Downloads/resources/General-Store.apk
+
+---------------------------------
+Kill port or node procees using PID if the port is occupied::
+$ps aux |grep appium 
+$kill -9 <PID>
+---------------------------------
+---------------------------------
+
+Android Gestures Docs ::
+https://github.com/appium/appium-uiautomator2-driver
+https://github.com/appium/appium-uiautomator2-driver/blob/master/docs/android-mobile-gestures.md
+
+Ios Gestures Docs::
+https://github.com/appium/appium-xcuitest-driver
+https://appium.github.io/appium-xcuitest-driver/4.35/
+
+---------------------------------
+---------------------------------
+IOS::
+
+
+1.Install XCode to compile app on suitable iphone/ipad 
+
+2.clone this uicatalog test app from https://github.com/appium/ios-uicatalog
+extract it and navigate to UIKitCatalog->UIKitCatalog.xcodeproj
+
+3.to open this 'UIKitCatalog.xcodeproj' we need xcode from appstore 
+we need xcode to compile app and to open 'UIKitCatalog.xcodeproj'
+
+4.dobule click on 'UIKitCatalog.xcodeproj' after xcode is installed
+
+5.From the top searchbar click on 'UIKitCatalog>iPhone 14 Pro' and select your phone and version
+
+6.Click on Play button , it will Buikd and open a simulator with the app inside the simulator
+
+once compiled to specific version you will get->'UIKitCatalog.app' in sub folder 
+
+7. $appium driver list 
+8. $appium driver install xcuitest
+
+
+---------------------------------
+Appium Inspector Json[IOS]::
+[will install the .app]
+{
+  "app": "/Users/karthikp/Documents/GitHub/Appium2.0.1_Selenium_Project/src/test/java/resources/UIKitCatalog.app",
+  "deviceName": "iPhone 14 Pro",
+  "platformVersion": "16.4",
+  "automationName": "XCUITest",
+  "platformName": "IOS"
+}
+
+[will launch the app based on bundleId]
+{
+  "appium:deviceName": "iPhone 14 Pro",
+  "appium:platformVersion": "16.4",
+  "appium:automationName": "XCUITest",
+  "platformName": "IOS",
+  "appium:bundleId": "com.example.apple-samplecode.UICatalog"
+}
+---------------------------------
+ios bundle ids for inbuilt apps::
+https://support.apple.com/en-in/guide/deployment/depece748c41/web	
+---------------------------------
+
+Android Real Device Automation :
+Just enable Remote Debugging option from Developer options 
+and check using $adb devices 
+change the device name in UIAutomator2Options object 
+
+---------------------------------
+
+IOS Real Device Automation ::
+(must read)
+https://appium.readthedocs.io/en/stable/en/drivers/ios-xcuitest-real-devices/
+
+
+To enable Developer Mode on iOS 16.6, follow these steps:
+
+Go to Settings > Privacy > Developer Mode.
+Toggle the Developer Mode switch to On.
+You will be prompted to restart your device.
+After your device restarts, Developer Mode will be enabled.
+
+then instll brew:
+
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+brew install libimobiledevice
+ideviceinfo -s
+
+
+brew install ios-deploy
+
+more info:
+https://libimobiledevice.org/#resources
+https://github.com/ios-control/ios-deploy
+
+Three new Capabilities are needed to run the Tests on real Device :
+
+d.setCapability("xcodeOrgId","xxxxxxxx");
+d.setCapability("xcodeSigningId","iPhone Developer");
+d.setCapability("udid","xxxxxxxx");
+d.setCapability("updateWDABundleId","xxxxxxx");
+
+
+How to get the xcodeOrgId?
+It is TeamID  generated by Apple.You can find your Team ID using your developer account. Sign in to developer.apple.com/account, and click Membership in the sidebar.
+ Your Team ID appears in the Membership Information section under the team name
+
+How to get udid?
+https://www.wikihow.com/Obtain-the-Identifier-Number-(UDID)-for-an-iPhone,-iPod-or-iPad
+
+What is updateWDABundleId?
+Often we need provisioning profile from Apple to run the apps on Real Devices.And this Provisioning Profile generates Bundle ID
+
+And we need to Sign the App to run on the device using Bundle id.
+
+Connect your Device.
+
+How to Create Provisioning Profile to run APpium Tests?
+From Xcode -
+
+
+Verify Untrusted Developer
+Run Build for WebDriverAgent and App under Test with this Provisional Profile.
+
+more info : 
+(must read)
+https://appium.readthedocs.io/en/stable/en/drivers/ios-xcuitest-real-devices/
+https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device
+https://appium.github.io/appium-xcuitest-driver/4.35/real-device-config/
+https://github.com/appium/appium-xcuitest-driver/blob/master/docs/real-device-config.md
+
+
+
+---------------------------------
+
+
+
+mac mouse increase senitivity setting::
+
+defaults read -g com.apple.mouse.scaling
+
+defaults write -g com.apple.mouse.scaling 15.0
