@@ -7,9 +7,60 @@ import java.util.*;
 
 public class StringsDemo {
     public static void main(String[] args) {
-        //            012345
+        //            0123456789
         String str = "azbcdefzzz";
-        frequencyOfEachCharacter(str);
+        printAllSubStringOfAGivenString(str);
+
+    }
+
+    private static void printAllSubStringOfAGivenString(String str) {
+        String input = "abcd";
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < input.length(); i++) {
+            String subStr = "";
+            for (int j = i; j < input.length(); j++) {
+//                System.out.print(j);
+                subStr += input.charAt(j);
+                list.add(subStr);
+                System.out.print(subStr + "\n");
+            }
+            System.out.println();
+        }
+        System.out.println("list = " + list);
+    }
+
+
+    private static void removeAllOccurrencesOfACharacter2(String str) {
+        char c = 'z';
+        String res = str.replace(Character.toString(c), "");
+        System.out.println("res = " + res);
+    }
+
+    private static void removeAllOccurrencesOfACharacter(String str) {
+        char c = 'z';
+        StringBuilder word = new StringBuilder(str);
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) == c) {
+                word.deleteCharAt(i);
+            }
+        }
+        System.out.println("after removing chars res = " + word);
+    }
+
+    private static void insertCharactersInAStringAtCertainPosition(String str) {
+        int[] stars = {0, 1, 2, 3, 4, 5, 6};
+        StringBuilder res = new StringBuilder();
+        int leftPointer = 0;
+        for (int i = 0; i < str.length(); i++) {
+            if (i < stars.length && i == stars[leftPointer]) { // check i with extracted index of stars array here and also check with starts length
+                int star = stars[leftPointer];
+                leftPointer++;
+                res.append('*');
+            }
+            char c = str.charAt(i);
+            res.append(c);
+        }
+        System.out.println("res = " + res);
 
     }
 
