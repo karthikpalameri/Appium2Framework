@@ -11,9 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -80,7 +78,8 @@ public class IOSBaseTest extends AppiumUtils {
         ));
     }
 
-    protected void scrollToElement(RemoteWebElement webViewElement) {
+    protected void
+    scrollToElement(RemoteWebElement webViewElement) {
         driver.executeScript("mobile: scrollToElement", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) webViewElement).getId()
         ));

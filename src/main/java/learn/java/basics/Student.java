@@ -1,4 +1,4 @@
-package learn.java;
+package learn.java.basics;
 
 public class Student {
     int id;

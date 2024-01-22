@@ -1,4 +1,4 @@
-package learn.java.threadsdemo;
+package learn.java.basics.threadsdemo;
 
 public class ThreadDemoUsingRunnableInterface implements Runnable {
 

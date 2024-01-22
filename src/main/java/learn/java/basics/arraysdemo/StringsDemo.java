@@ -1,4 +1,4 @@
-package learn.java;
+package learn.java.basics.arraysdemo;
 
 import lombok.val;
 
@@ -36,7 +36,7 @@ public class StringsDemo {
         System.out.println("res = " + res);
     }
 
-    private static void removeAllOccurrencesOfACharacter(String str) {
+    private static void removeAllOcurrencesOfACharacter(String str) {
         char c = 'z';
         StringBuilder word = new StringBuilder(str);
         for (int i = 0; i < word.length(); i++) {

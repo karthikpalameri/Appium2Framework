@@ -1,12 +1,68 @@
-package learn.java;
+package learn.java.basics;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.random.RandomGenerator;
 
 public class interviewQuestions {
     public static void main(String[] args) {
-        mergeTwoListInJava();
+
+    }
+
+
+    private static void removeDuplicateFromString2() {
+        String str = "this is test";
+
+        HashSet<Character> hs = new LinkedHashSet<>();
+        for (Character ch :
+                str.toCharArray()) {
+            hs.add(ch);
+        }
+
+        System.out.println("hs = " + hs);
+
+    }
+
+    private static void removeDuplicateFromString() {
+        String str = "this is test";
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (char c :
+                str.toCharArray()) {
+            if (!stringBuilder.toString().contains(String.valueOf(c))) {
+                stringBuilder.append(c);
+            }
+        }
+        System.out.println("stringBuilder = " + stringBuilder);
+    }
+
+    private static void stringIsImmutable() {
+        String str1 = "java";
+        String str2 = str1;
+        System.out.println(str1 == str2);
+        str1 = "xyz";
+
+        System.out.println(str1 == str2);
+    }
+
+    private static void sortHashMapByValue() {
+        Map<String, Integer> scores = new HashMap<>();
+        scores.put("sam", 5);
+        scores.put("kim", 1);
+        scores.put("zen", 10);
+        System.out.println("scores = " + scores);
+        Map<String, Integer> sortedValues = new LinkedHashMap<>();
+        Set<Map.Entry<String, Integer>> entries = scores.entrySet();
+        System.out.println("entries = " + entries);
+        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(entries);
+        System.out.println("entryList = " + entryList);
+
+        entryList.sort((x, y) -> x.getValue().compareTo(y.getValue()));
+        System.out.println("entryList = " + entryList);
+
+        for (Map.Entry<String, Integer> e : entryList) {
+            sortedValues.put(e.getKey(), e.getValue());
+        }
+        System.out.println("entryList = " + entryList);
     }
 
     private static void mergeTwoListInJava() {

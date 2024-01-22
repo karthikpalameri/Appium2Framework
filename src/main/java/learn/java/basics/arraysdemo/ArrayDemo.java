@@ -1,4 +1,6 @@
-package learn.java;
+package learn.java.basics.arraysdemo;
+
+import learn.java.basics.Student;
 
 import java.util.*;
 
