@@ -1,4 +1,4 @@
-package learn.java.basics.simplemath;
+package learn.java.ds.simplemath;
 
 public class LcmDemo {
     public static void main(String[] args) {

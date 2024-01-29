@@ -1,4 +1,4 @@
-package learn.java.basics.simplemath;
+package learn.java.ds.simplemath;
 
 public class TrailingZerosInFactorial {
     public static void main(String[] args) {

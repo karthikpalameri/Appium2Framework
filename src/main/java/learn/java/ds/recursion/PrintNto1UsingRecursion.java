@@ -1,4 +1,4 @@
-package learn.java.basics.recursion;
+package learn.java.ds.recursion;
 
 public class PrintNto1UsingRecursion {
     private static void fun(int n) {

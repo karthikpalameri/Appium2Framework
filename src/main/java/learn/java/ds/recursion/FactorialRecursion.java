@@ -1,4 +1,4 @@
-package learn.java.basics.recursion;
+package learn.java.ds.recursion;
 
 public class FactorialRecursion {
     public static void main(String[] args) {
