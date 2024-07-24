@@ -32,10 +32,10 @@ public class MergeSortDemo {
         int[] left = new int[n1];
         int[] right = new int[n2];
 
-        for (int i = 0; i < n1; i++) {
+        for (int i = 0; i < n1; i++) {//copy to left array
             left[i] = arr[low + i];
         }
-        for (int i = 0; i < n2; i++) {
+        for (int i = 0; i < n2; i++) {//copy to right array
             right[i] = arr[mid + 1 + i];
         }
         int i = 0, j = 0, k = low;
@@ -51,12 +51,12 @@ public class MergeSortDemo {
             }
         }
         System.out.println("arr = " + Arrays.toString(arr));
-        while (i < n1) {
+        while (i < n1) {//copy remaining elements to res array
             arr[k] = left[i];
             i++;
             k++;
         }
-        while (j < n2) {
+        while (j < n2) {//copy remaining elements to res array
             arr[k] = right[j];
             k++;
             j++;
