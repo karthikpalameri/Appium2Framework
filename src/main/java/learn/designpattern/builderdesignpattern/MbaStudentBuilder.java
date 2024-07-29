@@ -1,10 +1,15 @@
 package learn.designpattern.builderdesignpattern;
 
-public class CollegeStudentBuilder extends StudentBuilder {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MbaStudentBuilder extends StudentBuilder {
 
   @Override
-  public EngineeringStudentBuilder setSubjects() {
-    subjects.add("schoolsub1");
+  public MbaStudentBuilder setSubjects() {
+    List<String> subs = new ArrayList<>();
+    subs.add("mba sub1");
+    this.subjects = subs;
     return this;
   }
 }

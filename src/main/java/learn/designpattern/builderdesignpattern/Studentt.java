@@ -8,4 +8,12 @@ public class Studentt {
     this.id = studentBuilder.id;
     this.name = studentBuilder.name;
   }
+
+  @Override
+  public String toString() {
+    return "Studentt{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        '}';
+  }
 }
