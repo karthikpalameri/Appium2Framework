@@ -14,10 +14,10 @@ public class FindKthSmallestElement {
         int h = n - 1;
         int pivot = arr[h];
         while (l <= h) {
-            int p = lomutoPartitionIt(arr, l, h);
-            if (p == k - 1) {
+            int p = lomutoPartitionIt(arr, l, h);//p is partition index
+            if (p == k - 1) { //if partition index == kth smallest
                 return k;
-            } else if (p > k - 1) {
+            } else if (p > k - 1) {//if partition index is falling on right, check on left by adjusting
                 h = p - 1;
             } else {
                 l = p + 1;
@@ -29,16 +29,17 @@ public class FindKthSmallestElement {
     private static int lomutoPartitionIt(int[] arr, int l, int h) {
         int pivot = arr[h];
         int i = l - 1;
-        for (int j = 0; j < h - 1; j++) {
+        for (int j = 0; j < h - 1; j++) {//h-1 , as h is pivot
             if (arr[j] < pivot) {
-                i++;
+                i++;//increment the left window
                 swapItFun(arr, i, j);
             }
         }
+        //reposition pivot at last
         i++;
         swapItFun(arr, i, h);
         System.out.println("i = " + i);
-        return i;
+        return i; //return partition index at last
     }
 
     private static void swapItFun(int[] arr, int i, int j) {
