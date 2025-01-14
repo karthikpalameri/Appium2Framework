@@ -1,6 +1,6 @@
 package learn.java.ds.strings;
 
-import java.util.*;
+import java.util.Arrays;
 
 public class LeftMostRepeatingCharacter {
     public static final int CHAR = 256;
@@ -8,7 +8,22 @@ public class LeftMostRepeatingCharacter {
     public static void main(String[] args) {
         String str = "abfccbd";
 
-        findLeftMostRepeatingCharacter(str);
+        findLeftMostRepeatingCharacter2(str);
+    }
+
+    private static int findLeftMostRepeatingCharacter2(String str) {
+        boolean[] arr = new boolean[CHAR];
+        int res = -1;
+
+        for (int i = str.length() - 1; i >= 0; i--) {
+            if (arr[str.charAt(i)] == false) {
+                arr[str.charAt(i)] = true;
+            } else {
+                res = i;
+            }
+        }
+        System.out.println("res = " + res);
+        return res;
     }
 
     private static void findLeftMostRepeatingCharacter(String str) {
