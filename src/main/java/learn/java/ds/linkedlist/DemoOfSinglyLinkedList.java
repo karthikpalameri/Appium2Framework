@@ -39,9 +39,8 @@ public class DemoOfSinglyLinkedList {
             return temp;
         }
         Node curr = head;
-        if (curr == null)
-            return head;
-
+//        if (curr == null)
+//            return head;
         //example
         // 10 20 30 40 50
         //  0  1  2  3  4
@@ -49,6 +48,8 @@ public class DemoOfSinglyLinkedList {
         for (int i = 0; i <= pos - 2 && curr.next != null; i++) {
             curr = curr.next;
         }
+        if (curr == null)
+            return head;
 
         //properly link it
         temp.next = curr.next; //first store this before its lost
@@ -65,8 +66,8 @@ public class DemoOfSinglyLinkedList {
 
         head = null;
         head = insertEnd(head, 40);
-        head = insertEnd(head, 50);
-        head = insertEnd(head, 60);
+//        head = insertEnd(head, 50);
+//        head = insertEnd(head, 60);
 
 //        head = null;
         head = insertAtPosition(head, 4, 100);
