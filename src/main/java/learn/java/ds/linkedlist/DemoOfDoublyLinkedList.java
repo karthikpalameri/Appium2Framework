@@ -42,6 +42,51 @@ public class DemoOfDoublyLinkedList {
         return head;
     }
 
+    static Nodee deleteBegin(Nodee head) {
+        //checks 
+        //if no elements
+        if (head == null)
+            return null;
+
+        //null<->[10|next:null,prev:null]
+        //if only 1 element 
+        if (head.next == null)
+            return null;
+
+        //move head to next node and set prev reference to null
+        // null<->[10|prev:null, next:20]<->[20|prev:10, next:null]<->null
+        // head
+        //            head
+        // null<-><->[20|prev:null, next:null]<->null
+
+        head = head.next;//move head
+        head.prev = null;//make prev ref as null
+        return head;
+    }
+
+    static Nodee deleteEnd(Nodee head) {
+        //checks
+        //empty 
+        if (head == null)
+            return null;
+        //only 1 node
+        if (head.next == null)
+            return null; //returning null as we are removing it.
+        //30 20 10
+        //h
+        //   c
+
+        Nodee curr = head;
+        while (curr.next != null) {
+            curr = curr.next;
+        }
+        System.out.println("curr is at , curr.data = " + curr.data);
+
+        curr.prev.next = null;// reach the end , go back and then set the next reference to null
+
+        return head;
+    }
+
     static Nodee reverseDoublyLinkedList(Nodee head) {
         //corner case handle 
         if (head == null)
@@ -97,7 +142,6 @@ public class DemoOfDoublyLinkedList {
         return prev.prev;
     }
 
-
     public static void main(String[] args) {
         Nodee head = null;
         head = insertBegin(head, 20);
@@ -108,6 +152,10 @@ public class DemoOfDoublyLinkedList {
 
         //reverse doubly linked list 
         head = reverseDoublyLinkedList(head);
+
+//        head = deleteBegin(head);
+
+        deleteEnd(head);
         System.out.println("head = " + head);
     }
 }
