@@ -10,7 +10,7 @@ class Nodeee {
     }
 }
 
-public class DemoOfCircularLinkedList {
+public class DemoOfCircularSinglyLinkedList {
     static Nodeee insertEnd(Nodeee head, int data) {
         //create 1 node
         Nodeee temp = new Nodeee(data);
@@ -67,6 +67,60 @@ public class DemoOfCircularLinkedList {
         } while (x != head);//do while x is not reached back to head
     }
 
+    private static Nodeee insertAtBeginnig(Nodeee head, int x) {
+        //create a temp node with x data
+        Nodeee temp = new Nodeee(x);
+
+        //checks
+        //if list is null or empty
+        if (head == null) {
+            temp.next = temp; // link it to itself
+        } else {
+            //10 20 30
+            //      c
+            //         100
+            //go to last node of cirular singly linked list , insert it and modify the refernces
+            Nodeee curr = head;
+            while (curr.next != head)
+                curr = curr.next;
+            System.out.println("curr is now pointing to last node , curr.data = " + curr.data);
+            // modify references
+            curr.next = temp;
+            temp.next = head;
+        }
+        //just return temp as head
+        return temp;
+    }
+
+    private static Nodeee insertAtBeginnig2(Nodeee head, int x) {
+        //create temp node
+        Nodeee temp = new Nodeee(x);
+
+        //checks
+        //if list is empty
+        if (head == null) {
+            temp.next = temp;
+            return temp;
+        } else {
+            //10 20 30
+            //h
+            //   100
+            //   t
+
+            //insert temp after the head and swap the data
+
+            //link temp with next element of head
+            temp.next = head.next;
+            head.next = temp;
+
+            //swap the data
+            int tempValue = temp.data;
+            temp.data = head.data;
+            head.data = tempValue;
+            return head;
+        }
+    }
+
     public static void main(String[] args) {
         Nodeee head = null;
         head = insertEnd(head, 10);
@@ -78,7 +132,11 @@ public class DemoOfCircularLinkedList {
 
         circularLinkedListTraversal(head);
         circularLinkedListTraversal2(head);
+
+//        insertAtBeginnig(head, 100);
+        insertAtBeginnig2(head, 100);
         System.out.println("head = " + head);
     }
+
 
 }
