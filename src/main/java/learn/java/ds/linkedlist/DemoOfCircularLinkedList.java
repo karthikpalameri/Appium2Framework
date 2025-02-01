@@ -80,4 +80,5 @@ public class DemoOfCircularLinkedList {
         circularLinkedListTraversal2(head);
         System.out.println("head = " + head);
     }
+
 }
