@@ -187,6 +187,90 @@ public class DemoOfCircularSinglyLinkedList {
         }
     }
 
+    private static Nodeee deleteHeadOfCircularSinglyLinkedList(Nodeee head) {
+        //checks
+        //if empty
+        if (head == null) {
+            return null;
+        }
+        //if single element and its cirular then return null as we are deleting it
+        if (head.next == head) {
+            return null;
+        }
+
+        //10 20 30
+        //h
+        //      c
+        Nodeee curr = head;
+        while (curr.next != head) {
+            curr = curr.next;
+        }
+        System.out.println("Curr is not pointing to node curr.data =" + curr.data);
+
+        curr.next = head.next;//link curr to head.next so we can deleted head
+//        head = head.next;//move head to next ?
+
+        return curr.next;// we are returning curr.next so we can get rid of head
+    }
+
+    private static Nodeee deleteHeadOfCircularSinglyLinkedList2(Nodeee head) {
+
+        //checks
+        //if empty
+        if (head == null) {
+            return null;
+        }
+        //if only 1 element
+        if (head.next == head) { // check if its circular and only 1 element
+            return null; // returning null as we are deleting it
+        }
+
+        // 10  20  30
+        // h
+        //copy middile 20 to head and delete head
+        // 20  20  30
+        //    del
+        // 20  30
+
+        head.data = head.next.data; //copy 20 to 1st post
+        //del 20
+        head.next = head.next.next;// we are deleted middle 20, so now list is 20,30
+        return head;
+    }
+
+    private static Nodeee deleteKthElementFromCicularSinglyLinkedList(Nodeee head, int k) {
+        //checks
+        //if list empty
+        if (head == null) {
+            return null;
+        }
+        //if k =1
+        // 10    20    30
+        // h
+        // k
+        if (k == 1) {
+            return deleteHeadOfCircularSinglyLinkedList2(head);
+        }
+
+        // if k != 1 ; ie., k=2
+        // 10   20  30
+        //      k
+        // 0    1   2 // indexs
+        // c         // curr
+
+        Nodeee curr = head;
+        for (int i = 0; i < k - 2; i++) {
+            curr = curr.next; // tracers the curr till 1 las position i.e., 10
+        }
+
+        System.out.println("curr is now poining to node, curr.data =" + curr.data);
+
+        //usng curr delete the kth element
+        //linking
+        curr.next = curr.next.next;
+        return head;
+    }
+
     public static void main(String[] args) {
         Nodeee head = null;
         head = insertEnd(head, 10);
@@ -203,9 +287,12 @@ public class DemoOfCircularSinglyLinkedList {
 //        insertAtBeginnig2(head, 100);
 
 //        insertAtEndOfCircularSinglyLinkedList(head, 100);
-        insertAtEndOfCircularSinglyLinkedList2(head, 100);
+//        insertAtEndOfCircularSinglyLinkedList2(head, 100);
+
+//        deleteHeadOfCircularSinglyLinkedList(head);
+//        deleteHeadOfCircularSinglyLinkedList2(head);
+
+        deleteKthElementFromCicularSinglyLinkedList(head, 1);
         System.out.println("head = " + head);
     }
-
-
 }
