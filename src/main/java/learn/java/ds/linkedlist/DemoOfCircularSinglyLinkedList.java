@@ -227,7 +227,7 @@ public class DemoOfCircularSinglyLinkedList {
 
         // 10  20  30
         // h
-        //copy middile 20 to head and delete head
+        //copy middle 20 to head and delete head
         // 20  20  30
         //    del
         // 20  30
