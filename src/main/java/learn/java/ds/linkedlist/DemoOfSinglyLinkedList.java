@@ -130,8 +130,120 @@ public class DemoOfSinglyLinkedList {
         return head;
     }
 
+    private static void printMiddleOfSinglyLinkedList(Node head) {
+        //checks
+        //if empty
+        if (head == null) {
+            return;
+        }
+        int count = 0;
+        //find the middle
+        for (Node curr = head; curr != null; curr = curr.next) {
+            count++;
+        }
+        System.out.println("count = " + count);
+        //bring back curr to head;
+        Node curr = head;
+        //move the curr to mid
+        for (int i = 0; i < count / 2; i++) {
+            curr = curr.next;
+        }
+        System.out.println("curr is now pointing to middle position , curr.data = " + curr.data);
+    }
+
+    private static void printMiddleOfSinglyLinkedList2(Node head) {
+        //checks
+        if (head == null) return;
+
+        //10  20  30
+        //h
+        //f
+        //s
+
+        Node slow = head;
+        Node fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;//move 1 step at a time
+            fast = fast.next.next;//move 2 steps at a time;
+        }
+
+        //after iteration slow should point to mid
+        System.out.println("slow pointer is now pointing to mid i.e., ; slow.data = " + slow.data);
+    }
+
+    private static void printNthNodeFromtheEndOfSinglyLinkedList(Node head, int pos) {
+        //checks
+        //if empty
+        if (head == null) return;
+        // 10 20 30
+        // 0   1  2
+        //     p
+        //size = 3
+        //3-2 = 1
+        // size - pos
+
+        int size = 0;
+        for (Node curr = head; curr != null && curr.next != null; curr = curr.next) {
+            size++;
+        }
+
+        System.out.println("size = " + size);
+
+        //if pos requested is greater then size return nothing
+        if (pos > size) return;
+
+
+        Node curr = head;
+        for (int i = 0; i < (size - pos + 1); i++) {
+            curr = curr.next;
+        }
+
+        System.out.println("curr.data = " + curr.data);
+    }
+
+    private static void printNthNodeFromtheEndOfSinglyLinkedList2(Node head, int pos) {
+        //checks
+        //if empty
+        if (head == null) return;
+        // pos = 3
+        // 10 20 30 40 50 null
+        // s         f
+        //    s         f
+        //        s        f
+
+        // use 2 pointers and offset
+        Node first = head;
+        Node second = head;
+
+        //keep pos = 3 ,offset distance between first and second and traverse till last
+
+        for (int i = 0; i < pos; i++) {
+            //checks
+            if (first == null) {
+                System.out.println("pos might be more than size of linked list pos = " + pos);
+                return;
+            }
+            //move first  n times forward to create a offset
+            first = first.next;
+        }
+        System.out.println("first is now pointing to, first.data = " + first.data);
+
+        //traverse the first pointer till end
+        while (first != null) {
+            //keep the same speed for both the pointers to maintain offset
+            first = first.next;
+//            System.out.println("first.data = " + first.data);
+            second = second.next;
+            System.out.println("second.data = " + second.data);
+        }
+
+        System.out.println(" the second pointer will now be pointing to the Nth node from last , i.e., second.data = " + second.data);
+    }
+
     public static void main(String[] args) {
         Node head = null;
+        head = insertBegin(head, 50);
+        head = insertBegin(head, 40);
         head = insertBegin(head, 30);
         head = insertBegin(head, 20);
         head = insertBegin(head, 10);
@@ -147,7 +259,15 @@ public class DemoOfSinglyLinkedList {
 //        head = delLast(head);
 //
 //        int search = search(head, 40);
-        sortedInsertIntoSinglyLinkedList(head, 5);
+
+//        sortedInsertIntoSinglyLinkedList(head, 5);
+
+//        printMiddleOfSinglyLinkedList(head);
+//        printMiddleOfSinglyLinkedList2(head);
+
+//        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
+        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
         System.out.println("head = " + head);
     }
+
 }
