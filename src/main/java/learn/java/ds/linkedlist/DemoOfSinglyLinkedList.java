@@ -1,5 +1,9 @@
 package learn.java.ds.linkedlist;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 class Node {
     Node next;
     int data;
@@ -240,6 +244,63 @@ public class DemoOfSinglyLinkedList {
         System.out.println(" the second pointer will now be pointing to the Nth node from last , i.e., second.data = " + second.data);
     }
 
+    private static Node reverseSinglyLinkedList(Node head) {
+        //checks
+        if (head == null) return head;
+
+        List<Integer> arrList = new ArrayList<Integer>();
+        for (Node curr = head; curr != null; curr = curr.next) {
+            arrList.add(curr.data);
+        }
+        System.out.println("Arrays.asList(arrList) = " + Arrays.asList(arrList));
+
+        for (Node curr = head; curr != null; curr = curr.next) {
+            Integer remove = arrList.remove(arrList.size() - 1);//popped from last of arraylist
+            curr.data = remove;//assignj
+        }
+        return head;
+    }
+
+    private static Node reverseSinglyLinkedList2(Node head) {
+        //checks
+        if (head == null) return head;
+
+        //have 3 pointer prev, curr , next
+        // next will hold temporarily the next node reference
+        // now reverse link of curr to prev
+        // then move prev 1 step forward using curr ref
+        // then move curr 1 step forward using next ref
+
+        //example :
+        //10   20   30   40   50
+        //h
+        //p
+        //c
+        //n
+
+        //     c
+        //          n
+        //p
+        //  <-
+
+        //     p
+        //          c
+        //
+        Node prev = null;
+        Node curr = head;
+
+        curr = curr.next;
+        while (curr != null) {
+            Node next = curr.next; //next to hold next node ref
+            curr.next = prev; // reverse the link to prev ref
+            prev = curr; // move prev 1step forward using curr ref
+            curr = next; // move curr 1step forward using next ref
+        }
+        //at last prev will be referring the last node as curr will be pointing to null
+        //so return prev ref as new head;
+        return head;
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
@@ -266,7 +327,10 @@ public class DemoOfSinglyLinkedList {
 //        printMiddleOfSinglyLinkedList2(head);
 
 //        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
-        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
+//        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
+
+//        reverseSinglyLinkedList(head);
+        reverseSinglyLinkedList2(head);
         System.out.println("head = " + head);
     }
 
