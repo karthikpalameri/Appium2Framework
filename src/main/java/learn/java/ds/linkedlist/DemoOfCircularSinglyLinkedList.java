@@ -271,6 +271,28 @@ public class DemoOfCircularSinglyLinkedList {
         return head;
     }
 
+    private static boolean detectLoopUsingFloysCycleDetection(Nodeee head) {
+        //checks
+        //if empty
+        if (head == null) {
+            return false;
+        }
+
+        Nodeee slow = head;
+        Nodeee fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) {
+                System.out.println("Loop is present");
+                return true;
+            }
+        }
+        System.out.println("  Loop is not present");
+        return false;
+    }
+
     public static void main(String[] args) {
         Nodeee head = null;
         head = insertEnd(head, 10);
@@ -292,7 +314,9 @@ public class DemoOfCircularSinglyLinkedList {
 //        deleteHeadOfCircularSinglyLinkedList(head);
 //        deleteHeadOfCircularSinglyLinkedList2(head);
 
-        deleteKthElementFromCicularSinglyLinkedList(head, 1);
-        System.out.println("head = " + head);
+//        deleteKthElementFromCicularSinglyLinkedList(head, 1);
+
+        detectLoopUsingFloysCycleDetection(head);
+        System.out.println("head  = " + head);
     }
 }
