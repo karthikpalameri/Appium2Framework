@@ -368,6 +368,17 @@ public class DemoOfSinglyLinkedList {
         return head;
     }
 
+    private static void deleteGivenNodeInSiglyLikedList(Node toDelete) {
+        // 5 10 20 30 40 50
+        //10 10 20 30 40 50
+        //10 20 30 40 50
+
+        toDelete.data = toDelete.next.data; //copy data
+        toDelete.next = toDelete.next.next; // just skip and link os it will delink
+
+        System.out.println("Deleted given Node");
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
@@ -404,8 +415,10 @@ public class DemoOfSinglyLinkedList {
 //        head = insertBegin(head, 10);
 //        removeDuplicatedFromSinglyLinkedList(head);
 
-        reverseSinglyLinkedListInGroupsOfSizeK(head, 3);
+//        reverseSinglyLinkedListInGroupsOfSizeK(head, 3);
 
+        Node toDelete = insertBegin(head, 10);
+        deleteGivenNodeInSiglyLikedList(toDelete);
         System.out.println("head = " + head);
     }
 }
