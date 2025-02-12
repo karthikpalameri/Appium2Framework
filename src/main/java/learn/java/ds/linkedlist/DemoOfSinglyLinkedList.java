@@ -240,6 +240,34 @@ public class DemoOfSinglyLinkedList {
         System.out.println(" the second pointer will now be pointing to the Nth node from last , i.e., second.data = " + second.data);
     }
 
+    private static Node removeDuplicatedFromSinglyLinkedList(Node head) {
+        //checks
+        if (head == null) return head;
+
+
+        // temp
+
+        // 10 10 10 40 50 50
+        // c
+        // 10 10 40 50 50
+        // c
+        // 10 40 50 50
+        // c
+        // 10 40 50 50
+        //       c
+        // 10 40 50 null
+        //           c
+        Node curr = head;
+        while (curr != null && curr.next != null) {//keep iterating till end
+            if (curr.data == curr.next.data) {
+                curr.next = curr.next.next; //if same link it to next node
+            } else {
+                curr = curr.next;// if not duplicate then and only then move the curr to next pos; the if will take care of repeated deletion
+            }
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
@@ -266,7 +294,11 @@ public class DemoOfSinglyLinkedList {
 //        printMiddleOfSinglyLinkedList2(head);
 
 //        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
-        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
+//        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
+
+        head = insertBegin(head, 10);
+        head = insertBegin(head, 10);
+        removeDuplicatedFromSinglyLinkedList(head);
         System.out.println("head = " + head);
     }
 
