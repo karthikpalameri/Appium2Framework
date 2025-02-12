@@ -329,6 +329,45 @@ public class DemoOfSinglyLinkedList {
         return head;
     }
 
+    private static Node reverseSinglyLinkedListInGroupsOfSizeK(Node head, int k) {
+
+        //10  20  30  40  50   60  70  80
+        //c
+        //f       p
+
+        Node curr = head;
+        Node prevFirst = null;
+        boolean isFirstPass = true;
+        while (curr != null) {
+            Node first = curr;
+            int count = 0;
+            Node prev = null;
+            while (curr != null && count < k) {
+                //10 20 30  40
+                // f
+                //          c
+                //          n
+                //       p
+                //       h
+                // count = 3 ; 3rd iterarion ; prev should be the new head;
+                Node next = curr.next;//hold next temporarily
+                curr.next = prev; //prev will be null 1st
+                prev = curr;// move prev 1 step forward
+                curr = next;// move curr 1 step forward
+                count++;
+            }
+            //curr will be pointing to 40 now in outer loop
+            if (isFirstPass) {
+                head = prev;
+                isFirstPass = false;
+            } else {
+                prevFirst.next = prev;// linking
+            }
+            prevFirst = first;//prevFirst will always hold starting point
+        }
+        return head;
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
@@ -358,13 +397,15 @@ public class DemoOfSinglyLinkedList {
 //        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
 
 //        reverseSinglyLinkedList(head);
-        reverseSinglyLinkedList2(head);
+//        reverseSinglyLinkedList2(head);
 //        printNthNodeFromtheEndOfSinglyLinkedList2(head, 2);
 
-        head = insertBegin(head, 10);
-        head = insertBegin(head, 10);
-        removeDuplicatedFromSinglyLinkedList(head);
+//        head = insertBegin(head, 10);
+//        head = insertBegin(head, 10);
+//        removeDuplicatedFromSinglyLinkedList(head);
+
+        reverseSinglyLinkedListInGroupsOfSizeK(head, 3);
+
         System.out.println("head = " + head);
     }
-
 }
