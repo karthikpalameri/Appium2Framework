@@ -379,6 +379,46 @@ public class DemoOfSinglyLinkedList {
         System.out.println("Deleted given Node");
     }
 
+    private static Node segregateEvenAndOddInSinglyLinkedList(Node head) {
+
+        // 1 2 3 4 5
+        // make 2 seperate links for odd and even and ten append it
+
+        Node curr = head;
+        Node evenStart = null, evenEnd = null;
+        Node oddStart = null, oddEnd = null;
+        while (curr != null) {
+            if (curr.data % 2 == 0) {
+                if (evenStart == null && evenEnd == null) {
+                    evenStart = curr;
+                    evenEnd = curr;
+                } else {
+                    evenEnd.next = curr;//link it to next even
+                    evenEnd = evenEnd.next; //move the evenEnd pointer to next even node
+                }
+            } else {
+                if (oddStart == null && oddEnd == null) {
+                    oddStart = curr;
+                    oddEnd = curr;
+                } else {
+                    oddEnd.next = curr; // link it to curr ref
+                    oddEnd = oddEnd.next; //move the oddEnd pointer to next odd node
+                }
+            }
+            curr = curr.next;
+        }
+
+        //corner case if all are odd or even in a ll
+        if (evenStart == null || oddStart == null) {
+            return head;// we will only make 1 ll , and head will remain head , no need to link to other ll
+        }
+        //at this point we will have 2 linked nodes even ll and odd ll
+        //link both to make 1ll
+        evenEnd.next = oddStart; //linking
+        oddEnd.next = null; //making the end of the ll null at last node
+        return evenStart;
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
@@ -417,8 +457,10 @@ public class DemoOfSinglyLinkedList {
 
 //        reverseSinglyLinkedListInGroupsOfSizeK(head, 3);
 
-        Node toDelete = insertBegin(head, 10);
-        deleteGivenNodeInSiglyLikedList(toDelete);
+//        Node toDelete = insertBegin(head, 10);
+//        deleteGivenNodeInSiglyLikedList(toDelete);
+
+        segregateEvenAndOddInSinglyLinkedList(head);//passing all even nodes as test ; head has all even nodes
         System.out.println("head = " + head);
     }
 }
