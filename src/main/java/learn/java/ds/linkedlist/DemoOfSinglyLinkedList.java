@@ -6,11 +6,13 @@ import java.util.List;
 
 class Node {
     Node next;
+    Node random;//not needed
     int data;
 
     Node(int x) {
         data = x;
         next = null;
+        random = null;//not needed
     }
 
 }
@@ -475,6 +477,48 @@ public class DemoOfSinglyLinkedList {
         return count;
     }
 
+    private static Node cloneASinglyLinkedListWithRandomPointer(Node head) {
+        //checks
+        if (head == null) return head;
+
+        //example
+        // |--->|
+        // 1 -> 2 -> 3
+        // |<---|<---|
+
+        // c    n
+        //1st insert same elements in middle then copy the link refs to inserted elemnts
+        //at last seperate them
+
+        //step1 ins same elems
+        Node curr = head;
+        while (curr != null) {
+            Node next = curr.next;//holds next elem ie., 2
+            curr.next = new Node(curr.data); //create new node with curr.data and link to curr ref; 1->1 2->3
+            curr.next.next = next;//1->1->2  ->3
+            curr = next; //move the curr to where next was pointing
+        }
+
+        //1->1->2->2->3->3->null
+
+        //step2 copy the old random refs to the new nodes
+        for (Node curr2 = head; curr2 != null; curr2 = curr2.next.next) {
+            curr2.next.random = curr2.random != null ? curr2.random : null;
+        }
+
+        //step 3 seperate the 2 nodes
+        Node head2 = head.next; // keep track of clone head which starts from 1 step after ; so store in head2
+        Node clone = head2;
+
+        for (Node curr3 = head; curr3 != null; curr3 = curr3.next) {
+            curr3.next = curr3.next.next;
+            clone.next = clone.next != null ? clone.next : null;
+            clone = clone.next;// incrementer for clone
+        }
+        return head2; //return head2 ie., clone head
+
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
@@ -520,9 +564,12 @@ public class DemoOfSinglyLinkedList {
 //        segregateEvenAndOddInSinglyLinkedList(head);//passing all even nodes as test ; head has all even nodes
 
         //find intersection point of 2 linked lists
-        head2 = insertBegin(head2, 99);
-        int intersectionPointOfTwoLinkedList = isIntersectionPointOfTwoLinkedList(head, head2);
-        System.out.println("intersectionPointOfTwoLinkedList = " + intersectionPointOfTwoLinkedList);
+//        head2 = insertBegin(head2, 99);
+//        int intersectionPointOfTwoLinkedList = isIntersectionPointOfTwoLinkedList(head, head2);
+//        System.out.println("intersectionPointOfTwoLinkedList = " + intersectionPointOfTwoLinkedList);
+
+        //setup random references before
+        cloneASinglyLinkedListWithRandomPointer(head);
         System.out.println("head = " + head);
     }
 }
