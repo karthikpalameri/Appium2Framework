@@ -419,11 +419,68 @@ public class DemoOfSinglyLinkedList {
         return evenStart;
     }
 
+    private static int isIntersectionPointOfTwoLinkedList(Node head1, Node head2) {
+        //checks
+
+        //ex
+        // 50  40  30  20  10 ; head1
+        //        /
+        //     99             ; head2
+        // 1   2   3   4   5 ; size = 5
+        //     1   2   3   4 ; size = 4
+        // diff = 5 - 4 = 1
+        //     c1
+        //     c2
+
+        //if we sub head 1 length and head2 length we get common point where we can start traversing to find if intersection exists
+
+        //find size of both heads
+        int head1size = findSizeOfSinglyLinkedList(head1);
+        int head2size = findSizeOfSinglyLinkedList(head2);
+        int diff = Math.abs(head1size - head2size);
+        System.out.println("diff = " + diff);
+
+        //find the head which is largest and move sett curr1 to diff position
+        Node largestLinkedList = head1size > head2size ? head1 : head2;
+
+        Node curr1 = head1;
+        for (int i = 0; i < diff; i++) {
+            //move curr1 to diff pos
+            curr1 = curr1.next;
+        }
+
+        Node curr2 = head2;
+        while (curr1 != null && curr2 != null) {
+            if (curr1 == curr2) {
+                return curr1.data;
+            }
+            //conditions for while
+            curr1 = curr1.next;
+            curr2 = curr2.next;
+        }
+        return -1; //
+    }
+
+    private static int findSizeOfSinglyLinkedList(Node head) {
+        int count = 0;
+
+        //checks
+        if (head == null) return 0;
+        //ex
+        // 1 2 3
+        //
+        for (Node curr = head; curr != null; curr = curr.next) {
+            count++;
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
         head = insertBegin(head, 40);
         head = insertBegin(head, 30);
+        Node head2 = head; // temp 2nd head
         head = insertBegin(head, 20);
         head = insertBegin(head, 10);
 
@@ -460,7 +517,12 @@ public class DemoOfSinglyLinkedList {
 //        Node toDelete = insertBegin(head, 10);
 //        deleteGivenNodeInSiglyLikedList(toDelete);
 
-        segregateEvenAndOddInSinglyLinkedList(head);//passing all even nodes as test ; head has all even nodes
+//        segregateEvenAndOddInSinglyLinkedList(head);//passing all even nodes as test ; head has all even nodes
+
+        //find intersection point of 2 linked lists
+        head2 = insertBegin(head2, 99);
+        int intersectionPointOfTwoLinkedList = isIntersectionPointOfTwoLinkedList(head, head2);
+        System.out.println("intersectionPointOfTwoLinkedList = " + intersectionPointOfTwoLinkedList);
         System.out.println("head = " + head);
     }
 }
