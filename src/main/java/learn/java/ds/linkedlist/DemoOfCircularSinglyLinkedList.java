@@ -316,7 +316,7 @@ public class DemoOfCircularSinglyLinkedList {
 
 //        deleteKthElementFromCicularSinglyLinkedList(head, 1);
 
-        detectLoopUsingFloysCycleDetection(head);
+//        detectLoopUsingFloysCycleDetection(head);
         System.out.println("head  = " + head);
     }
 }

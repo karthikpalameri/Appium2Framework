@@ -519,12 +519,75 @@ public class DemoOfSinglyLinkedList {
 
     }
 
+    private static Node mergeTwoSortedSinglyLinkedLists(Node sortedHead1, Node sortedHead2) {
+        //checks
+        //if 1 is ssl is null return other
+        if (sortedHead1 == null)
+            return sortedHead2;
+        if (sortedHead2 == null)
+            return sortedHead1;
+// head and tail pointers to track start and end
+        Node head = null;
+        Node tail = null;
+        if (sortedHead1.data < sortedHead2.data) {
+            //whichever is less ,assign head and tail to it to start the iteration
+            head = sortedHead1;
+            tail = sortedHead2;
+            //move the sortedHead1 to 1 step forward in the smallest ll
+            sortedHead1 = sortedHead1.next;
+        } else {
+            head = sortedHead2;
+            tail = sortedHead2;
+            //move the sortedHead2 to 1 step forward in the smallest ll
+            sortedHead2 = sortedHead2.next;
+        }
+        // #1 : sortedHead1 -> 10 ; sortedHead2 -> 35 ; head - 5 ; tail = 5;
+        //ex
+        //       t->
+        //           h1
+        // 10 20 30  null
+        // 5  35
+        //    h2
+        // h
+        //
+        // #2 : sortedHead1 -> 20 ; sortedHead2 -> 35 ; head = 5 ; tail = 10;
+        // #3 : sortedHead1 -> 30 ; sortedHead2 -> 35 ; head = 5; tail = 20 ;
+        // #4 : sortedHead1 -> null; sortedHead2 ->35 ; head = 5; tail = 30 ;
+        // loop break;
+
+        // note : the remaining elements of sll are not traversed from 35 , append them to the end of tail to not loose them
+
+        //now head and tail are set ,start the iteration
+        while (sortedHead1 != null && sortedHead2 != null) { // if one of them is null break the loop
+            // compare the smallest between 2 sll
+            // assign the link and then move 1 step foraward in the smallest ll
+            // and assign tail to it
+            if (sortedHead1.data < sortedHead2.data) {
+                tail.next = sortedHead1; //assign link so that we can move tail
+                tail = sortedHead1; // move tail to sortedHead1
+                sortedHead1 = sortedHead1.next; // move sortedHead1 1 step forward
+            } else {
+                tail.next = sortedHead2; //assign link so that we can move tail
+                tail = sortedHead2; // move tail to sortedHead2
+                sortedHead2 = sortedHead2.next; // move sortedHead2 1 step forward
+            }
+
+        }
+
+        //append the remaining elements of linked list to the end of the tail ref
+        if (sortedHead1 == null) { //if this sortedHead1 hit null then append then its traversed fully
+            tail.next = sortedHead2; //link the tail ref to the sortedHead2 to not loose elements
+        } else {
+            tail.next = sortedHead1; //link the tail ref to the sortedHead1 to not loose elements
+        }
+        return head; //return head which is the start of the merged sll
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
         head = insertBegin(head, 40);
         head = insertBegin(head, 30);
-        Node head2 = head; // temp 2nd head
         head = insertBegin(head, 20);
         head = insertBegin(head, 10);
 
@@ -569,7 +632,20 @@ public class DemoOfSinglyLinkedList {
 //        System.out.println("intersectionPointOfTwoLinkedList = " + intersectionPointOfTwoLinkedList);
 
         //setup random references before
-        cloneASinglyLinkedListWithRandomPointer(head);
+//        cloneASinglyLinkedListWithRandomPointer(head);
+
+        // merge 2 sorted singly linked list
+        Node sortedHead1 = null;
+        sortedHead1 = insertEnd(sortedHead1, 10);
+        sortedHead1 = insertEnd(sortedHead1, 20);
+        sortedHead1 = insertEnd(sortedHead1, 30);
+
+        Node sortedHead2 = null;
+        sortedHead2 = insertEnd(sortedHead2, 5);
+        sortedHead2 = insertEnd(sortedHead2, 35);
+
+        mergeTwoSortedSinglyLinkedLists(sortedHead1, sortedHead2);
         System.out.println("head = " + head);
     }
+
 }
