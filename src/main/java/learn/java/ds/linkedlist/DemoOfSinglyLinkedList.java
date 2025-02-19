@@ -583,6 +583,55 @@ public class DemoOfSinglyLinkedList {
         return head; //return head which is the start of the merged sll
     }
 
+
+    private static boolean isPalindrome(Node head) {
+
+        //palindrome sll
+        //r a c e c a r
+        //0 1 2 3 4 5 6
+        // 7/2 = 3
+        //      m
+        //r a c e r a c
+        //      m
+        //compare before mid and after mid each element
+
+        //checks
+        if (head == null) return false;
+        //step1: find the 1st mid using slow and fast pointers at 1 and 2 movement speed
+        //ex
+        //1  2  2  1  null
+        //   s
+        //      f
+        //mid = 2
+        Node slow = head;
+        Node fast = head;
+        while (fast.next != null && fast.next.next != null) { //fast should always check 2 steps forward
+            slow = slow.next; // 1 move speed
+            fast = fast.next.next; // 2 move speed
+        }
+
+        //step2: reverse all the elements from mid to tail
+        Node revHead = reverseSinglyLinkedList(fast);
+        //1  2  1  2 null
+        //   m  r
+        //h
+        //c
+
+        //step3: compare head with mid+1 till end
+        Node curr = head;
+        while (revHead != null) { //traverse till not null
+            if (curr.data != revHead.data) { // 1!=1; 2!=2
+                //step4: break if not matching
+                return false;
+            }
+            //increment
+            curr = curr.next;
+            revHead = revHead.next;
+        }
+
+        return true; // return true if not breaking
+    }
+
     public static void main(String[] args) {
         Node head = null;
         head = insertBegin(head, 50);
@@ -635,16 +684,28 @@ public class DemoOfSinglyLinkedList {
 //        cloneASinglyLinkedListWithRandomPointer(head);
 
         // merge 2 sorted singly linked list
-        Node sortedHead1 = null;
-        sortedHead1 = insertEnd(sortedHead1, 10);
-        sortedHead1 = insertEnd(sortedHead1, 20);
-        sortedHead1 = insertEnd(sortedHead1, 30);
+//        Node sortedHead1 = null;
+//        sortedHead1 = insertEnd(sortedHead1, 10);
+//        sortedHead1 = insertEnd(sortedHead1, 20);
+//        sortedHead1 = insertEnd(sortedHead1, 30);
+//
+//        Node sortedHead2 = null;
+//        sortedHead2 = insertEnd(sortedHead2, 5);
+//        sortedHead2 = insertEnd(sortedHead2, 35);
+//
+//        mergeTwoSortedSinglyLinkedLists(sortedHead1, sortedHead2);
 
-        Node sortedHead2 = null;
-        sortedHead2 = insertEnd(sortedHead2, 5);
-        sortedHead2 = insertEnd(sortedHead2, 35);
 
-        mergeTwoSortedSinglyLinkedLists(sortedHead1, sortedHead2);
+        //isPalindrome
+        Node palindromeHead = null;
+        // 1 2 2 1
+        palindromeHead = insertEnd(palindromeHead, 1);
+        palindromeHead = insertEnd(palindromeHead, 2);
+        palindromeHead = insertEnd(palindromeHead, 2);
+        palindromeHead = insertEnd(palindromeHead, 1);
+        boolean palindrome = isPalindrome(palindromeHead);
+        System.out.println("palindrome = " + palindrome);
+
         System.out.println("head = " + head);
     }
 
