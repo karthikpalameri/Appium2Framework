@@ -1,11 +1,11 @@
 package learn.java.ds.stack;
 
-class MySimpleArrayImplStack {
+class MySimpleStackClass {
     int capacity;
     int top;
     int arr[];
 
-    public MySimpleArrayImplStack(int capacity) {
+    public MySimpleStackClass(int capacity) {
         this.capacity = capacity;
         this.top = -1;
         arr = new int[capacity];
@@ -48,9 +48,9 @@ class MySimpleArrayImplStack {
     }
 }
 
-public class MyStackWithArrayImplementation {
+public class MyStackDemoWithArrayImplementation {
     public static void main(String[] args) {
-        MySimpleArrayImplStack stack = new MySimpleArrayImplStack(5);
+        MySimpleStackClass stack = new MySimpleStackClass(5);
         stack.push(1);
         stack.push(2);
         System.out.println("stack.pop() = " + stack.pop());
