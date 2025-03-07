@@ -2,7 +2,7 @@ package learn.java.ds.stack;
 
 import java.util.Stack;
 
-public class isBalanced {
+public class IsBalanced {
     static boolean isMatching(char a, char b) {
         return (a == '(' && b == ')' || a == '{' && b == '}' || a == '[' && b == ']');
     }
